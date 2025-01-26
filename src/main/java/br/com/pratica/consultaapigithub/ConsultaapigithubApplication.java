@@ -1,5 +1,6 @@
 package br.com.pratica.consultaapigithub;
 
+import br.com.pratica.consultaapigithub.services.ConsumirAPI;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,19 +21,9 @@ public class ConsultaapigithubApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		System.out.println("teste");
 
-		try{
-			HttpClient httpClient = HttpClient.newHttpClient();
-			HttpRequest httpRequest = HttpRequest.newBuilder()
-					.uri(URI.create("https://api.github.com/users/Luiz-Gustavoo"))
-					.build();
-
-			HttpResponse httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-			System.out.println(httpResponse.body());
-
-		} catch(Exception e) {
-
-		}
+		ConsumirAPI consumirAPI = new ConsumirAPI();
+		String respostaAPI = consumirAPI.consumirAPI("https://api.github.com/users/Luiz-Gustavoo");
+		System.out.println(respostaAPI);
 	}
 
 
