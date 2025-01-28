@@ -19,10 +19,8 @@ public class ConsultaapigithubApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("teste");
-
 		ConsumirAPI consumirAPI = new ConsumirAPI();
-		String respostaAPI = consumirAPI.consumirAPI("https://api.github.com/users/Luiz-Gustavoo");
+		String respostaAPI = consumirAPI.consumirAPI("https://api.github.com/users/tchurusbangu");
 		System.out.println(respostaAPI);
 	}
 
