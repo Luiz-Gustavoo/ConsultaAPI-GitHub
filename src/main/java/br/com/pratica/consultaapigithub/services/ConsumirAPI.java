@@ -1,5 +1,6 @@
 package br.com.pratica.consultaapigithub.services;
 
+import br.com.pratica.consultaapigithub.ResultadoRequisicao;
 import br.com.pratica.consultaapigithub.excecoes.UsuarioNaoEncontradoException;
 
 import java.io.IOException;
@@ -12,7 +13,8 @@ public class ConsumirAPI {
     HttpClient client = HttpClient.newHttpClient();
     HttpResponse<String> response;
 
-    public String consumirAPI(String endereco) {
+    public ResultadoRequisicao consumirAPI(String endereco) {
+        String json = null;
         try {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(endereco))
@@ -20,17 +22,16 @@ public class ConsumirAPI {
 
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
             if(response.statusCode() == 404) {
+                json = response.body();
                 throw new UsuarioNaoEncontradoException("Usuário não encontrado");
             }
-
-        }  catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        }  catch (IOException | InterruptedException e) {
+            System.out.println("Aconteceu um erro inesperado");
         } catch (UsuarioNaoEncontradoException e) {
             System.out.println(e.getMessage());
+            return new ResultadoRequisicao("usuário não encontrado", false, json);
         }
-        String json = response.body();
-        return json;
+        json = response.body();
+        return new ResultadoRequisicao("usuário encontrado", true, json);
     }
 }
