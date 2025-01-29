@@ -20,8 +20,16 @@ public class ConsultaapigithubApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		ConsumirAPI consumirAPI = new ConsumirAPI();
-		String respostaAPI = consumirAPI.consumirAPI("https://api.github.com/users/tchurusbangu");
-		System.out.println(respostaAPI);
+		//tchurusbangu
+		ResultadoRequisicao respostaAPI = consumirAPI.consumirAPI("https://api.github.com/users/Luiz-Gustavoo");
+
+		if (!respostaAPI.isResultado()) {
+			System.out.println("Não foi possível localizar o usuário buscado");
+		} else {
+			System.out.println("Dados do usuário buscado: ");
+			System.out.println(respostaAPI.getJsonResultado());
+		}
+
 	}
 
 
