@@ -1,8 +1,10 @@
 package br.com.pratica.consultaapigithub.modelos;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-public record Usuario(@JsonAlias("Login") String nome,
+@JsonIgnoreProperties(ignoreUnknown = true)
+public record Usuario(@JsonAlias("login") String nome,
                       @JsonAlias("id") int id,
-                      @JsonAlias("html_url") String email) {
+                      @JsonAlias("html_url") String url_usuario) {
 }
