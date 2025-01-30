@@ -1,6 +1,8 @@
 package br.com.pratica.consultaapigithub;
 
+import br.com.pratica.consultaapigithub.modelos.Usuario;
 import br.com.pratica.consultaapigithub.services.ConsumirAPI;
+import br.com.pratica.consultaapigithub.services.ConverteDados;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,8 +22,15 @@ public class ConsultaapigithubApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		ConsumirAPI consumirAPI = new ConsumirAPI();
+		ConverteDados converteDados = new ConverteDados();
+
 		//tchurusbangu
 		ResultadoRequisicao respostaAPI = consumirAPI.consumirAPI("https://api.github.com/users/Luiz-Gustavoo");
+		System.out.println(respostaAPI);
+
+		Usuario usuarioConvertido = converteDados.converteDados(respostaAPI.getJsonResultado(), Usuario.class);
+		System.out.println(usuarioConvertido);
+
 
 		if (!respostaAPI.isResultado()) {
 			System.out.println("Não foi possível localizar o usuário buscado");
