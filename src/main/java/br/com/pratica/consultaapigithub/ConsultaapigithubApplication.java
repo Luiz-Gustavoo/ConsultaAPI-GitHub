@@ -26,20 +26,12 @@ public class ConsultaapigithubApplication implements CommandLineRunner {
 
 		//tchurusbangu
 		ResultadoRequisicao respostaAPI = consumirAPI.consumirAPI("https://api.github.com/users/Luiz-Gustavoo");
-		System.out.println(respostaAPI);
-
-		Usuario usuarioConvertido = converteDados.converteDados(respostaAPI.getJsonResultado(), Usuario.class);
-		System.out.println(usuarioConvertido);
-
-
 		if (!respostaAPI.isResultado()) {
 			System.out.println("Não foi possível localizar o usuário buscado");
 		} else {
 			System.out.println("Dados do usuário buscado: ");
-			System.out.println(respostaAPI.getJsonResultado());
+			Usuario usuarioConvertido = converteDados.converteDados(respostaAPI.getJsonResultado(), Usuario.class);
+			System.out.println(usuarioConvertido);
 		}
-
 	}
-
-
 }
