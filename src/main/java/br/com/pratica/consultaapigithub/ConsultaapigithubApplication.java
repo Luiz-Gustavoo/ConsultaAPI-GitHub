@@ -3,6 +3,7 @@ package br.com.pratica.consultaapigithub;
 import br.com.pratica.consultaapigithub.modelos.Usuario;
 import br.com.pratica.consultaapigithub.services.ConsumirAPI;
 import br.com.pratica.consultaapigithub.services.ConverteDados;
+import br.com.pratica.consultaapigithub.services.LerBuscaUsuario;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,6 +12,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Scanner;
 
 @SpringBootApplication
 public class ConsultaapigithubApplication implements CommandLineRunner {
@@ -23,11 +25,14 @@ public class ConsultaapigithubApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		ConsumirAPI consumirAPI = new ConsumirAPI();
 		ConverteDados converteDados = new ConverteDados();
+		LerBuscaUsuario lerBuscaUsuario = new LerBuscaUsuario();
+
+		String buscaUsuario = lerBuscaUsuario.lerBuscaUsuario();
 
 		//tchurusbangu
-		ResultadoRequisicao respostaAPI = consumirAPI.consumirAPI("https://api.github.com/users/Luiz-Gustavoo");
+		ResultadoRequisicao respostaAPI = consumirAPI.consumirAPI("https://api.github.com/users/"+buscaUsuario);
 		if (!respostaAPI.isResultado()) {
-			System.out.println("Não foi possível localizar o usuário buscado");
+			System.out.printf("Não foi possível localizar o usuário '%s' ", buscaUsuario);
 		} else {
 			System.out.println("Dados do usuário buscado: ");
 			Usuario usuarioConvertido = converteDados.converteDados(respostaAPI.getJsonResultado(), Usuario.class);
