@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 @SpringBootApplication
 public class ConsultaapigithubApplication implements CommandLineRunner {
@@ -47,13 +48,22 @@ public class ConsultaapigithubApplication implements CommandLineRunner {
 		}
 		System.out.println("Programa finalizado");
 
-		System.out.println("-----------------------------------------------");
-		System.out.println("Lista de usuários: ");
-		for (int i = 0; i < listaUsuarios.size(); i++) {
-			System.out.println(listaUsuarios.get(i));
-		}
+//		System.out.println("-----------------------------------------------");
+//		System.out.println("Lista de usuários: ");
+//		for (int i = 0; i < listaUsuarios.size(); i++) {
+//			System.out.println(listaUsuarios.get(i));
+//		}
 
 		GravarEmArquivo gravarEmArquivo = new GravarEmArquivo();
 		gravarEmArquivo.gravarEmArquivo(listaUsuarios.toString(), "Usuarios.txt");
+
+		File arquivoLeitura = new File("Usuarios.txt");
+		Scanner leitor = new Scanner(arquivoLeitura);
+
+		while(leitor.hasNextLine()) {
+			String texto = leitor.nextLine();
+			System.out.println(texto);
+		}
+		leitor.close();
 	}
 }
