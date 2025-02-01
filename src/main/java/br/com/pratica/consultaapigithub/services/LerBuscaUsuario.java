@@ -6,7 +6,7 @@ public class LerBuscaUsuario {
     private Scanner scanner = new Scanner(System.in);
 
     public String lerBuscaUsuario() {
-        System.out.println("Digite o usuário que deseja buscar: ");
+        System.out.println("\nDigite o usuário que deseja buscar: ");
         return scanner.nextLine();
     }
 }
