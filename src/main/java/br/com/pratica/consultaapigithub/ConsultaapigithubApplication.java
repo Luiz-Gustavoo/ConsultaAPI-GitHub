@@ -1,19 +1,13 @@
 package br.com.pratica.consultaapigithub;
 
 import br.com.pratica.consultaapigithub.modelos.Usuario;
-import br.com.pratica.consultaapigithub.services.ConsumirAPI;
-import br.com.pratica.consultaapigithub.services.ConverteDados;
-import br.com.pratica.consultaapigithub.services.GravarEmArquivo;
-import br.com.pratica.consultaapigithub.services.LerBuscaUsuario;
+import br.com.pratica.consultaapigithub.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 @SpringBootApplication
 public class ConsultaapigithubApplication implements CommandLineRunner {
@@ -48,22 +42,10 @@ public class ConsultaapigithubApplication implements CommandLineRunner {
 		}
 		System.out.println("Programa finalizado");
 
-//		System.out.println("-----------------------------------------------");
-//		System.out.println("Lista de usuários: ");
-//		for (int i = 0; i < listaUsuarios.size(); i++) {
-//			System.out.println(listaUsuarios.get(i));
-//		}
-
 		GravarEmArquivo gravarEmArquivo = new GravarEmArquivo();
 		gravarEmArquivo.gravarEmArquivo(listaUsuarios.toString(), "Usuarios.txt");
 
-		File arquivoLeitura = new File("Usuarios.txt");
-		Scanner leitor = new Scanner(arquivoLeitura);
-
-		while(leitor.hasNextLine()) {
-			String texto = leitor.nextLine();
-			System.out.println(texto);
-		}
-		leitor.close();
+		LerArquivo lerArquivo = new LerArquivo();
+		lerArquivo.lerArquivo();
 	}
 }
