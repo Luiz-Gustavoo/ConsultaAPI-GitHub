@@ -3,6 +3,7 @@ package br.com.pratica.consultaapigithub;
 import br.com.pratica.consultaapigithub.modelos.Usuario;
 import br.com.pratica.consultaapigithub.services.ConsumirAPI;
 import br.com.pratica.consultaapigithub.services.ConverteDados;
+import br.com.pratica.consultaapigithub.services.GravarEmArquivo;
 import br.com.pratica.consultaapigithub.services.LerBuscaUsuario;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -52,8 +53,7 @@ public class ConsultaapigithubApplication implements CommandLineRunner {
 			System.out.println(listaUsuarios.get(i));
 		}
 
-		FileWriter arquivoUsuario = new FileWriter("Usuarios.txt");
-		arquivoUsuario.write(listaUsuarios.toString());
-		arquivoUsuario.close();
+		GravarEmArquivo gravarEmArquivo = new GravarEmArquivo();
+		gravarEmArquivo.gravarEmArquivo(listaUsuarios.toString(), "Usuarios.txt");
 	}
 }
