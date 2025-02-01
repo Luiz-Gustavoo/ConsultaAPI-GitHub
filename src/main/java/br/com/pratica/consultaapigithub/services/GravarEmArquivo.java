@@ -10,7 +10,7 @@ public class GravarEmArquivo {
             FileWriter arquivoUsuario = new FileWriter(arquivo);
             arquivoUsuario.write(dados);
             arquivoUsuario.close();
-            System.out.println("Informações salvas");
+            System.out.println("Informações salvas no arquivo");
         } catch(IOException e ) {
             System.out.println(e.getMessage());
         }
