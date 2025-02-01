@@ -8,6 +8,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,11 +44,16 @@ public class ConsultaapigithubApplication implements CommandLineRunner {
 				System.out.println(usuarioConvertido);
 			}
 		}
+		System.out.println("Programa finalizado");
+
 		System.out.println("-----------------------------------------------");
 		System.out.println("Lista de usuários: ");
 		for (int i = 0; i < listaUsuarios.size(); i++) {
 			System.out.println(listaUsuarios.get(i));
 		}
-		System.out.println("Programa finalizado");
+
+		FileWriter arquivoUsuario = new FileWriter("Usuarios.txt");
+		arquivoUsuario.write(listaUsuarios.toString());
+		arquivoUsuario.close();
 	}
 }
