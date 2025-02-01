@@ -11,7 +11,7 @@ public record Usuario(@JsonAlias("login") String nome,
     @Override
     public String toString() {
         return
-                "Nome: " + nome + '\n' +
+                "\nNome: " + nome + '\n' +
                 "Id: " + id + '\n' +
                 "URL do usuário: " + url_usuario + '\n';
     }
